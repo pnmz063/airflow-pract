@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 @dag(
+    dag_id="1_2_first_task_flow_api_dag",
     start_date=datetime(2023, 1, 15),
     description="Привет, мир и task flow api",
     schedule_interval=None,
