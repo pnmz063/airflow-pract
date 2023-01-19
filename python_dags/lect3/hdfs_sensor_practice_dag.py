@@ -1,0 +1,19 @@
+from airflow import DAG
+from datetime import datetime
+from airflow.providers.apache.hdfs.sensors.hdfs import HdfsSensor
+
+
+with DAG(
+    dag_id="hdfs_file_sensor",
+    start_date=datetime(2022, 9, 16),
+    schedule_interval=None
+) as dag:
+
+    hdfs_test_conn = HdfsSensor(
+        task_id="hdfs_test_conn",
+        hdfs_conn_id="hdfs_default",
+        filepath="/staging/test.file",
+        dag=dag
+    )
+
+    hdfs_test_conn
