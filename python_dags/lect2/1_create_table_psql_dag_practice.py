@@ -15,7 +15,7 @@ with DAG(
         task_id="create_person",
         postgres_conn_id=POSTGRES_CONN_ID,
         sql="""
-    create table if not exists person_Kartashov_AP (id int4, p_name varchar(30), time_key varchar(10))
+    create table if not exists person_kartashov_ap (id int4, p_name varchar(30), time_key varchar(10))
     """
     )
 
@@ -23,7 +23,7 @@ with DAG(
         task_id="create_person_agg_info",
         postgres_conn_id=POSTGRES_CONN_ID,
         sql="""
-    create table if not exists person_agg_info_Kartashov_AP (id int4, p_name varchar(30), bank_account int4, time_key varchar(10));
+    create table if not exists person_agg_info_kartashov_ap (id int4, p_name varchar(30), bank_account int4, time_key varchar(10));
     """
     )
 
@@ -31,8 +31,9 @@ with DAG(
         task_id="create_person_op",
         postgres_conn_id=POSTGRES_CONN_ID,
         sql="""
-    create table if not exists person_operation_Kartashov_AP (id int4, income int4, expense int4, time_key varchar(10));
+    create table if not exists person_operation_kartashov_ap (id int4, income int4, expense int4, time_key varchar(10));
     """
     )
+
 
 create_person >> create_person_agg_info >> create_person_op

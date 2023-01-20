@@ -41,7 +41,7 @@ cat_conf = BashOperator(
 check_conf = PythonOperator(
     task_id="check_config",
     python_callable=check_config,
-    op_kwargs={"path_conf_txt": "/tmp/config.txt", "log_path": "/tmp/log_check_airflow_dag.txt"},
+    op_args=["/tmp/config.txt", "/tmp/log_check_airflow_dag.txt"],
     dag=dag
 )
 

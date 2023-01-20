@@ -24,7 +24,7 @@ def check_config(path_conf_txt, log_path):
 
 
 with DAG(
-        "1_3_1_check_config",
+        "1_3_1_check_config_with_as_set_upstream",
         start_date=datetime(2023, 1, 15),
         description="Запускает проверку эйрфлоу конфига",
         schedule_interval=None,
@@ -41,4 +41,4 @@ with DAG(
         op_kwargs={"path_conf_txt": "/tmp/config.txt", "log_path": "/tmp/log_check_airflow_dag.txt"},
     )
 
-cat_conf >> check_conf
+cat_conf.set_downstream(check_conf)
