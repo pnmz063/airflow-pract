@@ -3,11 +3,19 @@ from airflow.sensors.filesystem import FileSensor
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=1)
+}
+
 
 with DAG(
         dag_id="2_3_trigger_rules_dag",
         start_date=datetime(2023, 1, 15),
         description="2_3_trigger_rules_dag",
+        default_args=default_args,
         schedule_interval=None,
         tags=["airflow_practice"]
 ) as dag:

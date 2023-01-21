@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 import os
 
@@ -28,11 +28,18 @@ def count_lines(path_to_folder, filename):
 
 
 folder_path = "{{ var.value.path_to_folder_KartashovAP }}"
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=1)
+}
 
 with DAG(
     "answer_1",
     start_date=datetime(2023, 1, 15),
     description="remove_spaces",
+    default_args=default_args,
     schedule_interval=None,
     tags=["answers"]
 ) as dag:

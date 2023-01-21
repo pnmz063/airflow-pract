@@ -1,10 +1,17 @@
 from airflow.decorators import dag, task
-from datetime import datetime
+from datetime import datetime, timedelta
 
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=1)
+}
 
 @dag(
     dag_id="1_2_first_task_flow_api_dag",
     start_date=datetime(2023, 1, 15),
+    default_args=default_args,
     description="Привет, мир и task flow api",
     schedule_interval=None,
     tags=["airflow_practice"]

@@ -1,13 +1,20 @@
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 
 POSTGRES_CONN_ID = "postgres_default"
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=1)
+}
 
 with DAG(
         dag_id="2_1_create_table",
         start_date=datetime(2023, 1, 15),
         description="create_table",
+        default_args=default_args,
         schedule_interval=None,
         tags=["airflow_practice"]
 ) as dag:

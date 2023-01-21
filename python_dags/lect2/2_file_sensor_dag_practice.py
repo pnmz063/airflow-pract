@@ -1,14 +1,22 @@
 # macros, template, sensor
 from airflow import DAG
 from airflow.sensors.filesystem import FileSensor
-from datetime import datetime
+from datetime import datetime, timedelta
 # from airflow.models.variable import Variable
 # file_to_sensor = Variable.get("file_to_sensor")
+
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=2)
+}
 
 with DAG(
         dag_id="2_2_file_sensor_dag",
         start_date=datetime(2023, 1, 15),
         description="2_2_file_sensor_dag",
+        default_args=default_args,
         schedule_interval=None,
         tags=["airflow_practice"]
 ) as dag:

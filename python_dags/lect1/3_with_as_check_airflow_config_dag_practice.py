@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import sleep
 import os
 
@@ -23,10 +23,19 @@ def check_config(path_conf_txt, log_path):
         os.system(f"echo load_examples = True SUCCESS >> {log_path}")
 
 
+default_args = {
+    "owner": "airflow",
+    "depends_on_past": True,
+    "retries": 2,
+    "retry_delay": timedelta(minutes=1)
+}
+
+
 with DAG(
         "1_3_1_check_config_with_as_set_upstream",
         start_date=datetime(2023, 1, 15),
         description="Запускает проверку эйрфлоу конфига",
+        default_args=default_args,
         schedule_interval=None,
         tags=["airflow_practice"]
 ) as dag:

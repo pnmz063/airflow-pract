@@ -1,7 +1,7 @@
 # bash_op как xcom
 # использовать template для xcom
 # динамическое создание дагов
-# рендер xcom и provide_context
+# рендер xcom, provide_context
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
