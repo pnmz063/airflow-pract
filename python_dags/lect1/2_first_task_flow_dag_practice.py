@@ -10,17 +10,15 @@ from datetime import datetime
     tags=["airflow_practice"]
 )
 def first_task_flow_api_dag():
-
     @task
     def print_hello_world():
         print("Hello, world!")
 
     @task
-    def print_something_else():
+    def print_something_else(prev_task):
         print("and something else")
 
-    print_hello_world()
-    print_something_else()
+    print_something_else(print_hello_world())
 
 
 first_task_flow_api_dag()

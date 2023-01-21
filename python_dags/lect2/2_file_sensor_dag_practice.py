@@ -1,11 +1,9 @@
+# macros, template, sensor
 from airflow import DAG
 from airflow.sensors.filesystem import FileSensor
 from datetime import datetime
 # from airflow.models.variable import Variable
-
 # file_to_sensor = Variable.get("file_to_sensor")
-
-random_num = {{ 'macros.random.randint(1, 99)'}}
 
 with DAG(
         dag_id="2_2_file_sensor_dag",
