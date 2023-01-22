@@ -6,9 +6,10 @@ import pandas as pd
 import os
 
 
-def download_save_dataframe(some_link, path_to_save, filename):
-    df = pd.read_csv(some_link)
-    df.to_csv(path_to_save + filename)
+def download_file_and_save_csv(link, path_to_save, your_name):
+    df = pd.read_csv(link)
+    df.to_csv(f"{path_to_save}{your_name}_got.csv")
+    # /tmp/labs/KartashovAP/lab1/KartashovAP_got.csv
 
 
 def remove_spaces_in_cols(path_to_folder):
@@ -20,6 +21,7 @@ def remove_spaces_in_cols(path_to_folder):
                 df.columns = list(map(str.strip, list(df)))
                 df.to_csv(path_to_folder + filename + "_stripped")
                 print(f"{filename} strip SUCCESS")
+                # /tmp/labs/KartashovAP/lab1/KartashovAP_got.csv_stripped
 
 
 def count_lines(path_to_folder, filename):
@@ -36,14 +38,13 @@ default_args = {
 }
 
 with DAG(
-    "answer_1",
-    start_date=datetime(2023, 1, 15),
-    description="remove_spaces",
-    default_args=default_args,
-    schedule_interval=None,
-    tags=["answers"]
+        "answer_1",
+        start_date=datetime(2023, 1, 15),
+        description="remove_spaces",
+        default_args=default_args,
+        schedule_interval=None,
+        tags=["answers"]
 ) as dag:
-
     create_dir = BashOperator(
         task_id="create_dir",
         bash_command="{{ var.value.mk_dirs_KartashovAP }}"
@@ -51,11 +52,11 @@ with DAG(
 
     download_csv = PythonOperator(
         task_id="download_csv",
-        python_callable=download_save_dataframe,
+        python_callable=download_file_and_save_csv,
         op_kwargs={
-            "some_link": "{{ var.value.download_link }}",
+            "link": "{{ var.value.download_link }}",
             "path_to_save": folder_path,
-            "filename": "got.csv"
+            "your_name": "KartashovAP"
         }
     )
 
@@ -68,12 +69,12 @@ with DAG(
     cnt_lines = PythonOperator(
         task_id="cnt_lines",
         python_callable=count_lines,
-        op_args=[folder_path, "got.csv"]
+        op_args=[folder_path, "KartashovAP_got.csv"]
     )
 
     copy_to_local = BashOperator(
         task_id="copy_to_local",
-        bash_command="{{ var.value.scp_cmd_KartashovAP }}"
+        bash_command="{{ var.value.copy_to_local_KartashovAP }}"
     )
 
 create_dir >> download_csv >> [cnt_lines, rm_spaces] >> copy_to_local

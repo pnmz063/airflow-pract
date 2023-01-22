@@ -25,7 +25,7 @@ dag = DAG(
     description="Привет, мир",
     max_active_runs=1,
     schedule_interval=None,
-    tags=["airflow_practice"]
+    tags=["airflow_practice", "lect1"]
 )
 
 with_bash = BashOperator(

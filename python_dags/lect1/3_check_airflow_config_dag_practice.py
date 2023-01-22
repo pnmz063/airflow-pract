@@ -47,7 +47,7 @@ dag = DAG(
     default_args=default_args,
     description="Запускает проверку эйрфлоу конфига, редактирует конфиг, собирает логи",
     schedule_interval=None,
-    tags=["airflow_practice"]
+    tags=["airflow_practice", "lect1"]
 )
 
 start = BashOperator(

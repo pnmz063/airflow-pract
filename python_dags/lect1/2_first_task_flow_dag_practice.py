@@ -14,7 +14,7 @@ default_args = {
     default_args=default_args,
     description="Привет, мир и task flow api",
     schedule_interval=None,
-    tags=["airflow_practice"]
+    tags=["airflow_practice", "lect1"]
 )
 def first_task_flow_api_dag():
     @task
