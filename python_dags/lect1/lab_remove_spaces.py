@@ -21,3 +21,5 @@ def remove_spaces_in_cols(path_to_folder):
 def count_lines(path_to_folder, filename):
     df = pd.read_csv(path_to_folder + filename)
     print("Number of lines:- " + str(len(df)))
+
+# folder_path = путь к вашему каталогу
