@@ -7,6 +7,7 @@ with DAG(
     dag_id="3_1_hdfs_file_sensor",
     start_date=datetime(2022, 9, 16),
     schedule_interval=None,
+    description="sensor file from hdfs",
     tags=['airflow_practice']
 ) as dag:
 

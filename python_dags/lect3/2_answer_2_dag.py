@@ -18,21 +18,21 @@ with DAG(
         dag_id="2_answer_2_dag",
         start_date=datetime(2023, 1, 13),
         description="2_answer_2_dag",
-        schedule_interval="@daily",
+        schedule_interval=None,
         tags=["answers"]
 ) as dag:
-    start = BashOperator(task_id="start", bash_command="echo start; sleep 5", do_xcom_push=False)
+    start = BashOperator(task_id="start", bash_command="sleep 5", do_xcom_push=False)
 
     income_expense_generated = PythonOperator(
         task_id="income_expense_generated",
         python_callable=push_income_expense
     )
 
-    stop_generated = BashOperator(task_id="stop_generated", bash_command="echo stop_generated; sleep 5",
+    stop_generated = BashOperator(task_id="stop_generated", bash_command="sleep 5",
                                   do_xcom_push=False, trigger_rule="all_success")
 
     with TaskGroup("create_tables_tasks") as create_tables_tasks:
-        start_created = BashOperator(task_id="start_created", bash_command="echo start; sleep 5",
+        start_created = BashOperator(task_id="start_created", bash_command="sleep 5",
                                      do_xcom_push=False)
         create_person = PostgresOperator(
             task_id="create_person",
@@ -80,8 +80,8 @@ with DAG(
                 insert into person_operation 
                 values ( 
                         25091992, 
-                        '{{ ti.xcom_pull(key=None, task_ids='income_expense_generated')[1] }}'::integer, 
-                        '{{ ti.xcom_pull(key=None, task_ids='income_expense_generated')[0] }}'::integer,
+                        '{{ ti.xcom_pull(task_ids='income_expense_generated', key='push_income_expense')[1] }}'::integer, 
+                        '{{ ti.xcom_pull(task_ids='income_expense_generated', key='push_income_expense')[0] }}'::integer,
                         '{{ macros.ds_add(ds, -2) }}'
                 )
             """

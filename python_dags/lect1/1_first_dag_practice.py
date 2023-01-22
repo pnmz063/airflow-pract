@@ -14,8 +14,6 @@ def print_conext(**context):
 
 
 default_args = {
-    "owner": "airflow",
-    "depends_on_past": True,
     "retries": 2,
     "retry_delay": timedelta(minutes=1)
 }
