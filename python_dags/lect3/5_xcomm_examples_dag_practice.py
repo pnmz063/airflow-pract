@@ -20,17 +20,12 @@ def pull_nums(ti):
     print(pull_nums_list)
 
 
-def list_nums(**context):
-    my_list_nums = context['ti'].xcom_pull(task_ids=["test_task_1", "test_task_2", "test_task_3"], key="push_nums")[0][0]
-    print(my_list_nums)
-
-
 with DAG(
         dag_id="2_5_xcom_example",
         start_date=datetime(2023, 1, 13),
         description="xcom_example",
         schedule_interval=None,
-        tags=["airflow_practice"]
+        tags=["airflow_practice", "lect2"]
 ) as dag:
     test_task = [
         PythonOperator(
@@ -50,10 +45,4 @@ with DAG(
         do_xcom_push=False
     )
 
-    list_nums_task = PythonOperator(
-        task_id="list_nums_task",
-        python_callable=list_nums,
-        provide_context=True
-    )
-
-    sleep_task >> test_task >> pull_nums >> list_nums_task
+    sleep_task >> test_task >> pull_nums

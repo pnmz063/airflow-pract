@@ -7,8 +7,8 @@ from time import sleep
 import os
 
 # vars
-airflow_cfg = Variable.get("airflow.cfg")
-string_with_param_load_example = Variable.get("string_with_params_load_example")
+#airflow_cfg = Variable.get("airflow.cfg")
+#string_with_param_load_example = Variable.get("string_with_params_load_example")
 
 
 def check_and_edit_config_with_logging(log_path):
@@ -40,26 +40,27 @@ default_args = {
     "retries": 2,
     "retry_delay": timedelta(minutes=1)
 }
-with DAG(
-        "1_3_check_config_version_2",
-        start_date=datetime(2023, 1, 15),
-        default_args=default_args,
-        description="Запускает проверку эйрфлоу конфига, редактирует конфиг, собирает логи",
-        schedule_interval=None,
-        tags=["airflow_practice", "lect1"]
-) as dag:
 
-    start = BashOperator(
-        task_id="start",
-        bash_command="sleep 5",
-        dag=dag
-    )
+dag = DAG(
+    "1_3_check_config",
+    start_date=datetime(2023, 1, 15),
+    default_args=default_args,
+    description="Запускает проверку эйрфлоу конфига, редактирует конфиг, собирает логи",
+    schedule_interval=None,
+    tags=["airflow_practice", "lect1"]
+)
 
-    check_conf = PythonOperator(
-        task_id="check_config",
-        python_callable=check_and_edit_config_with_logging,
-        op_kwargs={"log_path": "/tmp/log_check_airflow_dag.txt"},
-        dag=dag
-    )
+start = BashOperator(
+    task_id="start",
+    bash_command="sleep 5",
+    dag=dag
+)
 
-start.set_downstream(check_conf)
+check_conf = PythonOperator(
+    task_id="check_config",
+    python_callable=check_and_edit_config_with_logging,
+    op_kwargs={"log_path": "/tmp/log_check_airflow_dag.txt"},
+    dag=dag
+)
+
+start >> check_conf

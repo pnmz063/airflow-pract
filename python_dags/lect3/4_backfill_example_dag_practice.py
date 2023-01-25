@@ -4,6 +4,9 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.bash import BashOperator
 from datetime import timedelta
+from pendulum import timezone
+
+local_tz = timezone("Europe/Moscow")
 
 default_args = {
     "owner": "airflow",
@@ -14,12 +17,12 @@ default_args = {
 
 with DAG(
         dag_id="2_4_backfill_example_dag",
-        start_date=datetime(2023, 1, 13),
+        start_date=datetime(2023, 1, 13, tzinfo=local_tz),
         description="2_4_backfill_example_dag",
         default_args=default_args,
         schedule_interval="@daily",
         catchup=True,
-        tags=["airflow_practice"]
+        tags=["airflow_practice", "lect2"]
 ) as dag:
 
     print_date = BashOperator(

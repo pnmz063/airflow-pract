@@ -9,7 +9,7 @@ def print_hello_world():
     print("Hello, world! ps: with python")
 
 
-def print_conext(**context):
+def print_context(**context):
     pprint(context)
 
 
@@ -42,7 +42,7 @@ with_python = PythonOperator(
 
 print_context = PythonOperator(
     task_id="print_context",
-    python_callable=print_conext,
+    python_callable=print_context,
     dag=dag
 )
 

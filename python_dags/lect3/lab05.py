@@ -5,6 +5,9 @@ from airflow.operators.bash import BashOperator
 from airflow.utils.task_group import TaskGroup
 from datetime import datetime
 from random import randint
+from pendulum import timezone
+
+local_tz = timezone("Europe/Moscow")
 
 
 def push_income_expense(ti):
@@ -15,10 +18,10 @@ def push_income_expense(ti):
 POSTGRES_CONN_ID = "postgres_default"
 
 with DAG(
-        dag_id="2_answer_2_dag",
-        start_date=datetime(2023, 1, 13),
-        description="2_answer_2_dag",
-        schedule_interval=None,
+        dag_id="lab05",
+        start_date=datetime(2023, 1, 13, tzinfo=local_tz),
+        description="lab05",
+        schedule_interval="@daily",
         tags=["answers"]
 ) as dag:
     start = BashOperator(task_id="start", bash_command="sleep 5", do_xcom_push=False)

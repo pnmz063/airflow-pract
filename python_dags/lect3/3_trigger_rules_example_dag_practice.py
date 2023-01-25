@@ -7,7 +7,7 @@ default_args = {
     "owner": "airflow",
     "depends_on_past": True,
     "retries": 2,
-    "retry_delay": timedelta(minutes=1)
+    "retry_delay": timedelta(minutes=3)
 }
 
 
@@ -17,7 +17,7 @@ with DAG(
         description="2_3_trigger_rules_dag",
         default_args=default_args,
         schedule_interval=None,
-        tags=["airflow_practice"]
+        tags=["airflow_practice", "lect2"]
 ) as dag:
     # оператор FileSensor по дефолту использует conn = fs_default
     file_sensor = FileSensor(
