@@ -7,8 +7,8 @@ from time import sleep
 import os
 
 # vars
-#airflow_cfg = Variable.get("airflow.cfg")
-#string_with_param_load_example = Variable.get("string_with_params_load_example")
+airflow_cfg = Variable.get("airflow.cfg")
+string_with_param_load_example = Variable.get("string_with_params_load_example")
 
 
 def check_and_edit_config_with_logging(log_path):
@@ -47,7 +47,7 @@ dag = DAG(
     default_args=default_args,
     description="Запускает проверку эйрфлоу конфига, редактирует конфиг, собирает логи",
     schedule_interval=None,
-    tags=["airflow_practice", "lect1"]
+    tags=["lect2"]
 )
 
 start = BashOperator(

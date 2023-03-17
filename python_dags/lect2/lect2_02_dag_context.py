@@ -24,12 +24,12 @@ default_args = {
 
 dag = DAG(
     "dag_context_practice",
-    start_date=datetime(2023, 1, 15),
+    start_date=datetime(2023, 2, 6),
     default_args=default_args,
     description="Привет, мир",
     max_active_runs=1,
-    schedule_interval=None,
-    tags=["airflow_practice", "lect2"]
+    schedule_interval="0 9 * * *",
+    tags=["lect2"]
 )
 
 bash = BashOperator(

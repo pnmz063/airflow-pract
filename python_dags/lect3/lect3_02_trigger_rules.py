@@ -12,12 +12,12 @@ default_args = {
 
 
 with DAG(
-        dag_id="2_3_trigger_rules_dag",
+        dag_id="2_trigger_rules",
         start_date=datetime(2023, 1, 15),
         description="2_3_trigger_rules_dag",
         default_args=default_args,
         schedule_interval=None,
-        tags=["airflow_practice", "lect2"]
+        tags=["lect3"]
 ) as dag:
     # оператор FileSensor по дефолту использует conn = fs_default
     file_sensor = FileSensor(

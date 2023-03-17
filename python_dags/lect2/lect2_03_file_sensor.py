@@ -17,7 +17,7 @@ with DAG(
         description="2_2_file_sensor_dag",
         default_args=default_args,
         schedule_interval=None,
-        tags=["airflow_practice", "lect2"]
+        tags=["lect2"]
 ) as dag:
 
     # оператор FileSensor по дефолту использует conn = fs_default

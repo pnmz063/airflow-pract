@@ -16,13 +16,13 @@ default_args = {
 }
 
 with DAG(
-        dag_id="2_4_backfill_example_dag",
+        dag_id="3_backfill",
         start_date=datetime(2023, 1, 13, tzinfo=local_tz),
         description="2_4_backfill_example_dag",
         default_args=default_args,
         schedule_interval="@daily",
         catchup=True,
-        tags=["airflow_practice", "lect2"]
+        tags=["lect3"]
 ) as dag:
 
     print_date = BashOperator(

@@ -27,7 +27,7 @@ with DAG(
         description="create_table",
         default_args=default_args,
         schedule_interval=None,
-        tags=["airflow_practice", "lect2"],
+        tags=["lect2"],
         max_active_runs=1,
 ) as dag:
     create_person = PostgresOperator(

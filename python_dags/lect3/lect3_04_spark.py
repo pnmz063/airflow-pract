@@ -16,10 +16,11 @@ SPARK_MAIN_CONF = {
 }
 
 with DAG(
-    "dag_id",
+    "4_spark",
     default_args={},
     description="",
-    max_active_runs=1
+    max_active_runs=1,
+    tags=['lect3']
 ) as dag:
     app = SparkSubmitOperator(
         name="sparkSubmitDag",

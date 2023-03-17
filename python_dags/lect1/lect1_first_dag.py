@@ -19,13 +19,13 @@ default_args = {
 }
 
 dag = DAG(
-    "1_1_first_dag",
+    "first_dag",
     start_date=datetime(2023, 1, 15),
     default_args=default_args,
     description="Привет, мир",
     max_active_runs=1,
     schedule_interval=None,
-    tags=["airflow_practice", "lect1"]
+    tags=["lect1"]
 )
 
 with_bash = BashOperator(

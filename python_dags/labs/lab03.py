@@ -43,7 +43,7 @@ with DAG(
         start_date=days_ago(2),
         description="lab03",
         schedule_interval=None,
-        tags=["airflow_practice", "lab03"]
+        tags=["lab03"]
 ) as dag:
     create_table = PostgresOperator(
         task_id="create_table",

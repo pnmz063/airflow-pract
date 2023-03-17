@@ -21,11 +21,11 @@ def pull_nums(ti):
 
 
 with DAG(
-        dag_id="2_5_xcom_example",
+        dag_id="5_xcom_example",
         start_date=datetime(2023, 1, 13),
         description="xcom_example",
         schedule_interval=None,
-        tags=["airflow_practice", "lect2"]
+        tags=["lect3"]
 ) as dag:
     test_task = [
         PythonOperator(
