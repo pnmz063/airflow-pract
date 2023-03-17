@@ -43,7 +43,7 @@ with DAG(
         description="remove_spaces",
         default_args=default_args,
         schedule_interval=None,
-        tags=["lab01"]
+        tags=["lab01_2"]
 ) as dag:
     create_dir = BashOperator(
         task_id="create_dir",
