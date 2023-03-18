@@ -12,9 +12,9 @@ default_args = {
 }
 
 with DAG(
-        dag_id="2_2_file_sensor_dag",
+        dag_id="file_sensor",
         start_date=datetime(2023, 1, 15),
-        description="2_2_file_sensor_dag",
+        description="file_sensor",
         default_args=default_args,
         schedule_interval=None,
         tags=["lect2"]

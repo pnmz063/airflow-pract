@@ -23,10 +23,10 @@ default_args = {
 }
 
 dag = DAG(
-    "dag_context_practice",
+    "context",
     start_date=datetime(2023, 2, 6),
     default_args=default_args,
-    description="Привет, мир",
+    description="context",
     max_active_runs=1,
     schedule_interval="0 9 * * *",
     tags=["lect2"]
