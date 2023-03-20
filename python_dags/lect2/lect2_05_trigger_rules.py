@@ -5,19 +5,18 @@ from datetime import datetime, timedelta
 
 default_args = {
     "owner": "airflow",
-    "depends_on_past": True,
     "retries": 2,
     "retry_delay": timedelta(minutes=3)
 }
 
 
 with DAG(
-        dag_id="2_trigger_rules",
+        dag_id="trigger_rules",
         start_date=datetime(2023, 1, 15),
-        description="2_3_trigger_rules_dag",
+        description="trigger_rules",
         default_args=default_args,
         schedule_interval=None,
-        tags=["lect3"]
+        tags=["lect2"]
 ) as dag:
     # оператор FileSensor по дефолту использует conn = fs_default
     file_sensor = FileSensor(

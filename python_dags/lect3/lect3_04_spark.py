@@ -16,7 +16,7 @@ SPARK_MAIN_CONF = {
 }
 
 with DAG(
-    "4_spark",
+    "spark",
     default_args={},
     description="",
     max_active_runs=1,

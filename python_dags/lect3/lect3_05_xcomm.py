@@ -21,7 +21,7 @@ def pull_nums(ti):
 
 
 with DAG(
-        dag_id="5_xcom_example",
+        dag_id="xcom_example",
         start_date=datetime(2023, 1, 13),
         description="xcom_example",
         schedule_interval=None,
