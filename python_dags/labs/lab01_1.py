@@ -8,7 +8,7 @@ import os
 
 # vars
 airflow_cfg = Variable.get("airflow.cfg")
-string_with_param_load_example = Variable.get("string_with_params_load_example")
+string_with_param_load_example = Variable.get("kartashov_string_with_params_load_example")
 
 """решение со звездочкой"""
 
