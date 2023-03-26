@@ -23,6 +23,7 @@ with DAG(
     tags=['lect3']
 ) as dag:
     app = SparkSubmitOperator(
+        task_id="sparkSubmitDag",
         name="sparkSubmitDag",
         conn_id="spark_op",
         application="path_to_jar", # если вы используете scala
