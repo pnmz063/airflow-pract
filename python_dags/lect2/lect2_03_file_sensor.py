@@ -23,7 +23,6 @@ with DAG(
     # оператор FileSensor по дефолту использует conn = fs_default
     file_sensor = FileSensor(
         task_id="file_sensor",
-        fs_conn_id="fs_default",
         filepath="{{ var.value.file_to_sensor }}", # file_to_sensor,
         poke_interval=5,
         timeout=80

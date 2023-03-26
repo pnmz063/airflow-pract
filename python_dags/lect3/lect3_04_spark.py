@@ -17,7 +17,7 @@ SPARK_MAIN_CONF = {
 
 with DAG(
     "spark",
-    start_date=datetime(2023,3,25),
+    start_date=datetime(2023, 3, 25),
     default_args={},
     description="",
     max_active_runs=1,
