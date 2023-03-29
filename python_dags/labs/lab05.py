@@ -19,10 +19,10 @@ POSTGRES_CONN_ID = "postgres_default"
 
 with DAG(
         dag_id="lab05",
-        start_date=datetime(2023, 1, 13, tzinfo=local_tz),
+        start_date=datetime(2023, 3, 25, tzinfo=local_tz),
         description="lab05",
         schedule_interval="@daily",
-        tags=["answers"]
+        tags=["lab05"]
 ) as dag:
     start = BashOperator(task_id="start", bash_command="sleep 5", do_xcom_push=False)
 

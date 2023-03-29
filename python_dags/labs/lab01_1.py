@@ -8,6 +8,7 @@ import os
 
 # vars
 airflow_cfg = Variable.get("airflow.cfg")
+airflow_cfg2 = "{{ var.value.airflow.cfg }}"
 string_with_param_load_example = Variable.get("kartashov_string_with_params_load_example")
 
 """решение со звездочкой"""
@@ -41,27 +42,25 @@ default_args = {
     "retry_delay": timedelta(minutes=1)
 }
 
-dag = DAG(
-    "lab01_1_check_config",
+with DAG (
+    "kartashov_lab01_1_check_config",
     start_date=datetime(2023, 1, 15),
     default_args=default_args,
     description="Запускает проверку эйрфлоу конфига, редактирует конфиг, собирает логи",
     schedule_interval=None,
-    tags=["lab01_1"]
-)
+    tags=["lab01"]
+) as dag:
 
-start = BashOperator(
-    task_id="start",
-    bash_command="sleep 5",
-    dag=dag
-)
+    start = BashOperator(
+        task_id="start",
+        bash_command="sleep 5"
+    )
 
-check_conf = PythonOperator(
-    task_id="check_config",
-    python_callable=check_and_edit_config_with_logging,
-    op_kwargs={"log_path": "/opt/airflow/dev/kartashov/lab01/log_check_airflow_dag.txt"},
-    dag=dag
-)
+    check_conf = PythonOperator(
+        task_id="check_config",
+        python_callable=check_and_edit_config_with_logging,
+        op_kwargs={"log_path": "/opt/airflow/dev/kartashov/lab01/log_check_airflow_dag.txt"}
+    )
 
 start >> check_conf
 

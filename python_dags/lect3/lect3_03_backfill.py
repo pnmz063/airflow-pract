@@ -27,7 +27,7 @@ with DAG(
 
     print_date = BashOperator(
         task_id="print_date",
-        bash_command='echo "execution_date = {{ ds }}" >> /tmp/log_backfill_dag.txt'
+        bash_command='echo "execution_date = {{ ds }}" >> opt/airflow/dev/log_backfill_dag.txt'
     )
 
     print_date

@@ -34,7 +34,7 @@ dag = DAG(
 
 bash = BashOperator(
     task_id="bash_task",
-    bash_command="echo Hello, world! my_exec_date = {{ ds }}",
+    bash_command="echo Hello, world! my_exec_date = {{ macros.ds( }}",
     dag=dag
 )
 

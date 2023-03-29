@@ -5,13 +5,14 @@ from datetime import datetime, timedelta
 from pprint import pprint
 
 
-def print_hello_world():
-    print("Hello, world! ps: with python")
+def print_hello_world(some_word):
+    print(f"Hello, world! ps: with python {some_word}")
 
 
 def print_context(**context):
     pprint(context)
 
+cmd = "dkjgls"
 
 default_args = {
     "retries": 2,
@@ -37,6 +38,7 @@ with_bash = BashOperator(
 with_python = PythonOperator(
     task_id="python_task",
     python_callable=print_hello_world,
+    op_args=['', ''],
     dag=dag
 )
 

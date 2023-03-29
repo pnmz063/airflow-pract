@@ -3,6 +3,7 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from datetime import datetime, timedelta
 
 POSTGRES_CONN_ID = "postgres_default"
+table = "table"
 
 default_args = {
     "retries": 2,
